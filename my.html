@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blogs - Nature Wonder Blog</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS (embedded for simplicity, consistent with previous pages) -->
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif; /* Adjust font as needed */
+            background-color: #f8f9fa; /* Light background for the blog page */
+        }
+
+        .navbar {
+            background-color: transparent !important;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: #fff !important;
+        }
+
+        .navbar-nav .nav-link {
+            color: rgba(255, 255, 255, 0.7) !important;
+            margin-left: 1.5rem;
+        }
+
+        .navbar-nav .nav-link.active,
+        .navbar-nav .nav-link:hover {
+            color: #fff !important;
+        }
+
+        .page-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('pics/blog\ back.jpeg') no-repeat center center/cover;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+        }
+
+        .blog-post {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            overflow: hidden;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .blog-post:hover {
+            transform: translateY(-5px);
+        }
+
+        .blog-post img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .blog-post-content {
+            padding: 25px;
+        }
+
+        .blog-post-title {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #343a40;
+        }
+
+        .blog-post-meta {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-bottom: 15px;
+        }
+
+        .blog-post-excerpt {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #495057;
+            margin-bottom: 20px;
+        }
+
+        .read-more-btn { /* Removed .publish-btn from here */
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .read-more-btn:hover { /* Removed .publish-btn:hover from here */
+            background-color: #0056b3;
+            color: white;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .user-id-display {
+            background-color: #e9ecef;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: #343a40;
+            word-break: break-all; /* Ensures long IDs wrap */
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Blog Site</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html">Blogs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="my.html">My blogs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="publish.html">Publish Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact us</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>My Published Blogs</h1>
+                <p class="lead">Manage and view your personal collection of blog posts.</p>
+            </div>
+        </section>
+
+        <section class="container my-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-10"> <!-- Increased column width for better display -->
+                    <div class="user-id-display mb-4">
+                        <strong>Your User ID:</strong> <span id="currentUserId">Loading...</span>
+                    </div>
+
+                    <h2 class="mb-4">Your Blogs</h2>
+                    <div id="blog-posts-container" class="row">
+                        <!-- Blog posts will be loaded here dynamically -->
+                        <div class="col-12 text-center text-muted" id="loadingIndicator">Loading your blogs...</div>
+                        <!-- Updated noBlogsMessage with a link -->
+                        <div class="col-12 text-center text-muted" id="noBlogsMessage" style="display: none;">
+                            You currently have no blogs published. <a href="publish-blog.html" class="text-primary fw-bold">Publish now!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Blog Site. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Modal Structure -->
+    <div class="modal fade" id="blogPostModal" tabindex="-1" aria-labelledby="blogPostModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="blogPostModalLabel">Blog Post Title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="blogPostModalBody">
+                    <!-- Blog content will be loaded here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, query, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Initialize Firebase
+        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        let currentUserId = null;
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
+        const blogPostsContainer = document.getElementById('blog-posts-container');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const noBlogsMessage = document.getElementById('noBlogsMessage');
+        const currentUserIdDisplay = document.getElementById('currentUserId');
+
+        // Authenticate user
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                currentUserId = user.uid;
+                currentUserIdDisplay.textContent = currentUserId;
+                console.log("Authenticated with UID:", currentUserId);
+                loadBlogPosts(currentUserId);
+            } else {
+                try {
+                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                        await signInWithCustomToken(auth, __initial_auth_token);
+                    } else {
+                        await signInAnonymously(auth);
+                    }
+                } catch (error) {
+                    console.error("Error signing in:", error);
+                    currentUserIdDisplay.textContent = "Error loading user ID.";
+                }
+            }
+        });
+
+        // Function to load blog posts for the current user
+        function loadBlogPosts(userId) {
+            if (!userId) {
+                console.log("No user ID available to load blogs.");
+                loadingIndicator.style.display = 'none';
+                noBlogsMessage.style.display = 'block';
+                return;
+            }
+
+            loadingIndicator.style.display = 'block';
+            noBlogsMessage.style.display = 'none';
+            blogPostsContainer.innerHTML = ''; // Clear previous blogs
+
+            // Query for blogs specific to the current user
+            const q = query(collection(db, `artifacts/${appId}/users/${userId}/my_blogs`));
+
+            onSnapshot(q, (snapshot) => {
+                blogPostsContainer.innerHTML = ''; // Clear existing blogs
+                if (snapshot.empty) {
+                    // Display the custom message and link when no blogs are found
+                    noBlogsMessage.style.display = 'block';
+                    loadingIndicator.style.display = 'none';
+                    return;
+                }
+                noBlogsMessage.style.display = 'none';
+                loadingIndicator.style.display = 'none';
+
+                snapshot.forEach((doc) => {
+                    const blog = doc.data();
+                    const date = blog.timestamp ? new Date(blog.timestamp.seconds * 1000).toLocaleDateString() : 'N/A';
+
+                    const blogCard = `
+                        <div class="col-md-6 col-lg-4">
+                            <div class="blog-post">
+                                <img src="${blog.imageUrl}" alt="${blog.title}">
+                                <div class="blog-post-content">
+                                    <h2 class="blog-post-title">${blog.title}</h2>
+                                    <p class="blog-post-meta">By ${blog.author.substring(0, 8)}... | ${date}</p>
+                                    <p class="blog-post-excerpt">${blog.content.substring(0, 100)}...</p>
+                                    <a href="#" class="read-more-btn" data-bs-toggle="modal" data-bs-target="#blogPostModal"
+                                       data-blog-title="${blog.title}"
+                                       data-blog-content="${blog.content}">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    blogPostsContainer.innerHTML += blogCard;
+                });
+            }, (error) => {
+                console.error("Error fetching blogs:", error);
+                loadingIndicator.textContent = "Error loading blogs.";
+            });
+        }
+
+        // Modal content population logic (reused from blog-listing-page)
+        const blogPostModal = document.getElementById('blogPostModal');
+        blogPostModal.addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget;
+            const title = button.getAttribute('data-blog-title');
+            const content = button.getAttribute('data-blog-content');
+
+            const modalTitle = blogPostModal.querySelector('.modal-title');
+            const modalBody = blogPostModal.querySelector('.modal-body');
+
+            modalTitle.textContent = title;
+            modalBody.textContent = content;
+        });
+    </script>
+    <!-- Bootstrap JS (includes Popper.js for modals) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

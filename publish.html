@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publish Your Blog - Nature Wonder Blog</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS (embedded for simplicity, consistent with previous pages) -->
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa; /* Fallback background for content below header */
+        }
+
+        .navbar {
+            background-color: transparent !important;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: #fff !important;
+        }
+
+        .navbar-nav .nav-link {
+            color: rgba(255, 255, 255, 0.7) !important;
+            margin-left: 1.5rem;
+        }
+
+        .navbar-nav .nav-link.active,
+        .navbar-nav .nav-link:hover {
+            color: #fff !important;
+        }
+
+        /* Main content wrapper to hold the background image and overlay */
+        .main-background-wrapper {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('pics/blog\ back.jpeg') no-repeat center center/cover;
+            min-height: 100vh; /* Ensure it covers the whole viewport height */
+            display: flex;
+            flex-direction: column;
+            position: relative; /* Needed for absolute positioning of navbar */
+            padding-top: 80px; /* Space for fixed navbar */
+        }
+
+        .page-header {
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            /* No background image here, as it's on the wrapper */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            flex-shrink: 0; /* Prevent header from shrinking */
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+        }
+
+        .publish-form-section {
+            flex-grow: 1; /* Allow form section to take available space */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align form to top, not center vertically */
+            padding-bottom: 50px; /* Padding above footer */
+        }
+
+        .publish-form-container {
+            background-color: rgba(255, 255, 255, 0.9); /* Slightly opaque white background for the form */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 700px; /* Limit form width */
+        }
+
+        .publish-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .publish-btn:hover {
+            background-color: #0056b3;
+            color: white;
+        }
+
+        footer {
+            background-color: rgba(52, 58, 64, 0.8); /* Slightly opaque footer background */
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            flex-shrink: 0; /* Prevent footer from shrinking */
+        }
+
+        .user-id-display {
+            background-color: rgba(233, 236, 239, 0.9); /* Slightly opaque background for ID */
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: #343a40;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-background-wrapper">
+        <header class="navbar navbar-expand-lg navbar-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">Blog Site</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="blog.html">Blogs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="my.html">My blogs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="publish.html">Publish Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact us</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+        <main class="flex-grow-1">
+            <section class="page-header">
+                <div class="container">
+                    <h1>Publish Your Blog Post</h1>
+                    <p class="lead">Share your stories and insights with the world.</p>
+                </div>
+            </section>
+
+            <section class="container publish-form-section">
+                <div class="publish-form-container">
+                    <div class="user-id-display mb-4">
+                        <strong>Your User ID:</strong> <span id="currentUserId">Loading...</span>
+                    </div>
+
+                    <h2 class="mb-4">New Blog Details</h2>
+                    <form id="publishBlogForm">
+                        <div class="mb-3">
+                            <label for="blogTitle" class="form-label">Blog Title</label>
+                            <input type="text" class="form-control" id="blogTitle" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="blogContent" class="form-label">Blog Content</label>
+                            <textarea class="form-control" id="blogContent" rows="10" required></textarea>
+                        </div>
+                        <button type="submit" class="btn publish-btn">Publish Blog</button>
+                        <div id="publishMessage" class="mt-3" style="display: none;"></div>
+                    </form>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="container">
+                <p>&copy; 2025 Blog Site. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Initialize Firebase
+        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        let currentUserId = null;
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
+        const publishMessageDiv = document.getElementById('publishMessage');
+        const currentUserIdDisplay = document.getElementById('currentUserId');
+
+        // Authenticate user
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                currentUserId = user.uid;
+                currentUserIdDisplay.textContent = currentUserId;
+                console.log("Authenticated with UID:", currentUserId);
+            } else {
+                try {
+                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                        await signInWithCustomToken(auth, __initial_auth_token);
+                    } else {
+                        await signInAnonymously(auth);
+                    }
+                } catch (error) {
+                    console.error("Error signing in:", error);
+                    currentUserIdDisplay.textContent = "Error loading user ID.";
+                }
+            }
+        });
+
+        // Function to save a new blog post
+        async function saveBlogPost(title, content) {
+            if (!currentUserId) {
+                console.error("User not authenticated. Cannot publish blog.");
+                displayMessage("Error: Please wait for authentication to complete.", 'danger');
+                return;
+            }
+
+            try {
+                const blogRef = collection(db, `artifacts/${appId}/users/${currentUserId}/my_blogs`);
+                await addDoc(blogRef, {
+                    title: title,
+                    content: content,
+                    author: currentUserId, // Using UID as author for simplicity
+                    timestamp: new Date(),
+                    imageUrl: `https://placehold.co/600x400/343a40/ffffff?text=${encodeURIComponent(title.substring(0, 15))}` // Placeholder image
+                });
+                displayMessage("Blog published successfully!", 'success');
+                document.getElementById('publishBlogForm').reset(); // Clear form
+            } catch (e) {
+                console.error("Error adding document: ", e);
+                displayMessage("Error publishing blog. Please try again.", 'danger');
+            }
+        }
+
+        // Handle publish form submission
+        document.getElementById('publishBlogForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const title = document.getElementById('blogTitle').value;
+            const content = document.getElementById('blogContent').value;
+            saveBlogPost(title, content);
+        });
+
+        // Function to display messages (success/error)
+        function displayMessage(message, type) {
+            publishMessageDiv.textContent = message;
+            publishMessageDiv.className = `mt-3 alert alert-${type}`;
+            publishMessageDiv.style.display = 'block';
+            setTimeout(() => {
+                publishMessageDiv.style.display = 'none';
+            }, 5000); // Hide after 5 seconds
+        }
+    </script>
+    <!-- Bootstrap JS (includes Popper.js for modals) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

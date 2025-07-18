@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Nature Wonder Blog</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS (embedded for simplicity, consistent with previous pages) -->
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa; /* Fallback background for content below header */
+        }
+
+        .navbar {
+            background-color: transparent !important;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: #fff !important;
+        }
+
+        .navbar-nav .nav-link {
+            color: rgba(255, 255, 255, 0.7) !important;
+            margin-left: 1.5rem;
+        }
+
+        .navbar-nav .nav-link.active,
+        .navbar-nav .nav-link:hover {
+            color: #fff !important;
+        }
+
+        /* Main content wrapper to hold the background image and overlay */
+        .main-background-wrapper {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('pics/blog\ back.jpeg') no-repeat center center/cover;
+            min-height: 100vh; /* Ensure it covers the whole viewport height */
+            display: flex;
+            flex-direction: column;
+            position: relative; /* Needed for absolute positioning of navbar */
+            padding-top: 80px; /* Space for fixed navbar */
+        }
+
+        .page-header {
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            flex-shrink: 0; /* Prevent header from shrinking */
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+        }
+
+        .contact-form-section {
+            flex-grow: 1; /* Allow form section to take available space */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align form to top, not center vertically */
+            padding-bottom: 50px; /* Padding above footer */
+        }
+
+        .contact-form-container {
+            background-color: rgba(255, 255, 255, 0.9); /* Slightly opaque white background for the form */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 700px; /* Limit form width */
+        }
+
+        .submit-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #0056b3;
+            color: white;
+        }
+
+        footer {
+            background-color: rgba(52, 58, 64, 0.8); /* Slightly opaque footer background */
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            flex-shrink: 0; /* Prevent footer from shrinking */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-background-wrapper">
+        <header class="navbar navbar-expand-lg navbar-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">Blog Site</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="blog.html">Blogs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="my.html">My blogs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="publish.html">Publish Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="contact.html">Contact us</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+        <main class="flex-grow-1">
+            <section class="page-header">
+                <div class="container">
+                    <h1>Get in Touch</h1>
+                    <p class="lead">We'd love to hear from you! Send us a message.</p>
+                </div>
+            </section>
+
+            <section class="container contact-form-section">
+                <div class="contact-form-container">
+                    <h2 class="mb-4">Send Us a Message</h2>
+                    <form id="contactForm">
+                        <div class="mb-3">
+                            <label for="contactName" class="form-label">Your Name</label>
+                            <input type="text" class="form-control" id="contactName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="contactEmail" class="form-label">Your Email</label>
+                            <input type="email" class="form-control" id="contactEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="contactSubject" class="form-label">Subject</label>
+                            <input type="text" class="form-control" id="contactSubject" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="contactMessage" class="form-label">Message</label>
+                            <textarea class="form-control" id="contactMessage" rows="8" required></textarea>
+                        </div>
+                        <button type="submit" class="btn submit-btn">Send Message</button>
+                        <div id="contactMessageStatus" class="mt-3" style="display: none;"></div>
+                    </form>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="container">
+                <p>&copy; 2025 Blog Site. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const name = document.getElementById('contactName').value;
+            const email = document.getElementById('contactEmail').value;
+            const subject = document.getElementById('contactSubject').value;
+            const message = document.getElementById('contactMessage').value;
+            const statusDiv = document.getElementById('contactMessageStatus');
+
+            // In a real application, you would send this data to a server (e.g., via fetch API)
+            // For this example, we'll just simulate a success message.
+            console.log('Contact Form Submitted:');
+            console.log('Name:', name);
+            console.log('Email:', email);
+            console.log('Subject:', subject);
+            console.log('Message:', message);
+
+            statusDiv.textContent = 'Thank you for your message! We will get back to you soon.';
+            statusDiv.className = 'mt-3 alert alert-success';
+            statusDiv.style.display = 'block';
+
+            // Clear the form
+            document.getElementById('contactForm').reset();
+
+            // Hide the message after a few seconds
+            setTimeout(() => {
+                statusDiv.style.display = 'none';
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
