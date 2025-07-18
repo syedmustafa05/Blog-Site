@@ -1,0 +1,77 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif; /* Adjust font as needed */
+}
+
+.hero-section {
+    background: url('pics/blog\ back.jpeg') no-repeat center center/cover; /* Updated image path */
+    height: 100vh; /* Full viewport height */
+    position: relative;
+    z-index: 1; /* Ensures content is above the background */
+    display: flex; /* For centering content vertically and horizontally */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+}
+
+/* Optional: Add an overlay to make text more readable, similar to the image */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3); /* Adjust opacity as needed */
+    z-index: -1; /* Behind the content but above the background image */
+}
+
+.hero-section h1 {
+    font-weight: bold;
+    font-size: 3.5rem; /* Adjust as needed */
+}
+
+.hero-section p.lead {
+    font-size: 1.25rem; /* Adjust as needed */
+    max-width: 600px; /* Limit width for readability */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Removed the .nav-item specific flex rules here, as centering is handled by Bootstrap on the parent */
+/* .nav-item {
+    text-align: center;
+} */
+
+.navbar {
+    background-color: transparent !important; /* Make navbar transparent */
+    padding-top: 1rem; /* Changed from 1.5rem to 1rem for consistency */
+    padding-bottom: 1rem; /* Changed from 1.5rem to 1rem for consistency */
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.7) !important; /* Lighter white for links */
+    margin-left: 1.5rem;
+}
+
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link:hover {
+    color: #fff !important; /* Pure white on active/hover */
+}
+
+/* Customizing Bootstrap buttons to match the image's style */
+.btn-outline-light {
+    border-color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.9);
+    transition: all 0.3s ease;
+}
+
+.btn-outline-light:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Slightly visible background on hover */
+    color: #fff;
+    border-color: #fff;
+}
